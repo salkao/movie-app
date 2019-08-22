@@ -30,7 +30,7 @@
 </template>
 
 <script>
-const firebase = require("firebase");
+const firebase = require('firebase');
 
 export default {
   data() {
@@ -43,20 +43,20 @@ export default {
   methods: {
     fav() {
       const favArray = [];
-      this.db.collection("favourites").get().then(q => {
-        q.forEach((doc) => this.favourites.push(doc.data()));
+      this.db.collection('favourites').get().then((q) => {
+        q.forEach(doc => this.favourites.push(doc.data()));
       });
     },
     link(favourite) {
       console.log(favourite);
       return `/movies/${favourite.id}`;
-    }
+    },
   },
   computed: {
   },
   created() {
     this.fav();
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>

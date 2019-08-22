@@ -39,6 +39,6 @@ export default new Router({
       path: '/search/:parameter',
       name: 'search',
       component: search,
-    }
+    },
   ],
 });
