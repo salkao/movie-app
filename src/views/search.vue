@@ -61,6 +61,7 @@
 
 <script>
 import { isEmpty } from 'lodash';
+import { filter } from 'lodash';
 
 export default {
   methods: {
@@ -75,13 +76,8 @@ export default {
   },
   computed: {
     movies() {
-      if (this.$route.params.parameter === 'likes') {
-        console.log('likes sort');
-        this.$store.dispatch('sortByLikes');
-      } else {
-        this.$store.dispatch('sortByReleaseYear');
-      }
-      return this.$store.getters.movies;
+      return _.filter(this.$store.getters.movies,
+        movie => movie.title.toUpperCase() === this.$route.params.parameter.toUpperCase());
     },
     grid() {
       return this.$store.getters.grid;

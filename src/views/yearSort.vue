@@ -31,28 +31,30 @@
         <v-flex id="row"
           s4 class="lg5-custom"
           v-for="(movie, index) in movies"
-          :key="movie.title">
-          <v-hover v-slot:default="{ hover }">
-            <v-card
-              class="card"
-              @click="viewMoveDetails(movie, index)"
-              :elevation="hover ? 24 : 1">
-              <v-img
-                :src="movie.cover"
-                class="white--text"
-                height="380px"
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)">
-                <v-card-title
-                  class="fill-height align-end"
-                  v-text="movie.title">
-                </v-card-title>
-              </v-img>
-              <v-card-actions>
-                <div class="text-center">
-                  <h5 class="pa-1">Rating: {{ movie.rating }}</h5>
-                </div>
-              </v-card-actions>
-            </v-card>
+          :key="movie.title"
+          >
+          <v-hover
+            v-slot:default="{ hover }">
+          <v-card
+            class="card"
+            @click="viewMoveDetails(movie, index)"
+            :elevation="hover ? 24 : 1">
+            <v-img
+              :src="movie.cover"
+              class="white--text"
+              height="380px"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)">
+              <v-card-title
+                class="fill-height align-end"
+                v-text="movie.title">
+              </v-card-title>
+            </v-img>
+            <v-card-actions>
+              <div class="text-center">
+                <h5 class="pa-1">Rating: {{ movie.rating }}</h5>
+              </div>
+            </v-card-actions>
+          </v-card>
           </v-hover>
         </v-flex>
       </v-layout>
@@ -61,6 +63,7 @@
 
 <script>
 import { isEmpty } from 'lodash';
+import { orderBy } from 'lodash';
 
 export default {
   methods: {
@@ -75,12 +78,7 @@ export default {
   },
   computed: {
     movies() {
-      if (this.$route.params.parameter === 'likes') {
-        console.log('likes sort');
-        this.$store.dispatch('sortByLikes');
-      } else {
         this.$store.dispatch('sortByReleaseYear');
-      }
       return this.$store.getters.movies;
     },
     grid() {
